@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import 'antd/dist/antd.css'
 import { Form, Select, Input, Button, Icon, Upload, Modal } from 'antd';
 import Navbar from '@/coms/navbar'
+import Api from '@/tool/api.js'
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -38,15 +39,23 @@ export default class AddOrder extends Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        this.Add(values);
       }
     });
   }
 
-  handleSelectChange = (value) => {
-    console.log(value);
-    this.props.form.setFieldsValue({
-      note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
-    });
+  Add (params) {
+    let file = this.state.fileList[0]
+    let param = {
+      title: params.title,
+      price: params.price,
+      num: params.num,
+      content: params.info,
+      image: file.thumbUrl
+    }
+    Api.post('products/add', param, r => {
+      console.log(r);
+    })
   }
 
   render () {
@@ -108,7 +117,7 @@ export default class AddOrder extends Component {
               })(
                 <div className="clearfix">
                   <Upload
-                    action="//jsonplaceholder.typicode.com/posts/"
+                    action="/hello"
                     listType="picture-card"
                     fileList={fileList}
                     onPreview={this.handlePreview}

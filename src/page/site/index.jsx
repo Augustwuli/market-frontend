@@ -14,6 +14,8 @@ export default class Index extends Component {
   }
 
   componentDidMount () {
+    Api.get('products/list', null, r => {
+    })
   }
 
   render () {
