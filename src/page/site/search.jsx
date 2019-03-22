@@ -4,11 +4,16 @@ import 'antd/dist/antd.css'
 import Topbar from '@/coms/topbar'
 const { Meta } = Card;
 
-export default class Index extends Component {
+export default class Search extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      keyword: this.props.location.state.keyword
     }
+  }
+
+  componentDidMount(){
+    console.log(`关键字为：${this.state.keyword}`)
   }
 
   render () {

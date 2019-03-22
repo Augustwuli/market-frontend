@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import {Menu, Icon, Input} from 'antd'
 import { Link } from 'react-router-dom'
+import {withRouter} from "react-router-dom"
 import 'antd/dist/antd.css'
 const Search = Input.Search;
 
-export default class Topbar extends Component {
+class Topbar extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -12,11 +13,13 @@ export default class Topbar extends Component {
     }
   }
 
-  handleClick = (e) => {
-    console.log('click ', e);
-    // this.setState({
-    //   current: e.key,
-    // });
+  jump = (e) => {
+    this.props.history.push({
+      pathname: '/search',
+      state: {
+        keyword: e
+      }
+    })
   }
 
   render () {
@@ -30,7 +33,7 @@ export default class Topbar extends Component {
           <Menu.Item>
             <Search
               placeholder="搜索"
-              onSearch={value => console.log(value)}
+              onSearch={value => this.jump(value)}
               style={{ width: 200 }}
             />
           </Menu.Item>
@@ -44,3 +47,4 @@ export default class Topbar extends Component {
     )
   }
 }
+export default withRouter(Topbar);
