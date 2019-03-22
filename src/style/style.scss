@@ -74,13 +74,44 @@
   .main{
     width: 80%;
     margin-left: 20%; 
-    padding: 0 5%;
+    padding: 30px 5%;
     .title{
       padding-top: 30px;
       font-size: 24px;
     }
     .btns{
       padding: 50px 0; 
+    }
+  }
+}
+.detail-page{
+  width: 76%;
+  margin: 0 auto;
+  margin-top: 100px;
+  .detail-param{
+    margin-top: 50px; 
+  }
+  .detail-block{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    .detail-img{
+      width: 360px;
+      height: 260px;
+      background: #364D79;
+    }
+    .detail-info{
+      width: calc(100% - 360px);
+      padding-left: 100px; 
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      .btns{
+        position: absolute;
+        bottom: 0;
+      }
     }
   }
 }

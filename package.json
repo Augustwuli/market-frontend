@@ -121,5 +121,5 @@
       "react-app"
     ]
   },
-  "proxy": "https://cnodejs.org/"
+  "proxy": "http://localhost:9000/"
 }

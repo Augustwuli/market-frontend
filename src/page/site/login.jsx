@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
-import {Form, Icon, Input, Button} from 'antd'
+import {Form, Icon, Input, Button, Radio, Alert} from 'antd'
+import { Link } from 'react-router-dom'
+import Api from '@/tool/api.js'
 import 'antd/dist/antd.css'
 
 export default class Login extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      toast: false,
+      statu: 0,
+      messgae: ''
     }
   }
   
@@ -13,19 +18,55 @@ export default class Login extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        this.Login(values);
       }
     });
   }
 
+  Login (params) {
+    Api.post('users/login', params, r => {
+      this.setState({
+        message: r.message,
+        toast: true,
+        statu: r.statu
+      },function(){
+        console.log('getdata'+this.state.message,this.state.toast,this.state.statu)
+      })
+      setTimeout(()=>{
+        this.setState({
+          toast: false,
+        },function(){
+          console.log('getdata'+this.state.toast)
+        })
+        if(r.statu === 1) {
+          if(params.type === '0'){
+            sessionStorage.setItem('managerId', r.data.userId)
+            sessionStorage.setItem('managerName', params.userName)
+            this.props.history.push("/manager");
+          }else if(params.type === '1'){
+            sessionStorage.setItem('userId', r.data.userId)
+            sessionStorage.setItem('userName', params.userName)
+            this.props.history.push("/");
+          }
+        }
+      },1000);
+    })
+  }
+
   render () {
     const { getFieldDecorator } = this.props.form;
+    const { toast ,message,statu } = this.state;
+    let dom = null;
+    if (toast) {
+      dom = <Alert className="toast" message={message} type={statu===1?'success':'error'} />
+    }
     return (
       <div className="login-page">
         <div style={{width: 'calc(100% - 500px)'}}>
-          <img alt="轮播图片" src="../image/login.png" style={{width: '60%'}} ></img>
+          <img alt="图标" src="../image/login.png" style={{width: '60%'}} ></img>
         </div>
         <div>
+        {dom}
           <Form onSubmit={this.handleSubmit} className="login-form" style={{width: 300}}>
             <Form.Item>
               {getFieldDecorator('userName', {
@@ -45,7 +86,15 @@ export default class Login extends Component {
               <Button type="primary" htmlType="submit" className="login-form-button">
                 登录
               </Button>
-              Or <a href="">立即注册!</a>
+              Or <Link to="/sign">立即注册!</Link>
+            </Form.Item>
+            <Form.Item>
+              {getFieldDecorator('type')(
+                <Radio.Group>
+                  <Radio value="1">用户</Radio>
+                  <Radio value="0">管理员</Radio>
+                </Radio.Group>
+              )}
             </Form.Item>
           </Form>
         </div>

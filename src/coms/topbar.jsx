@@ -9,7 +9,18 @@ class Topbar extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      current: '',
+      login: false,
+      userName: ''
+    }
+  }
+
+  componentDidMount () {
+    let userName = sessionStorage.getItem('userName');
+    if(userName){
+      this.setState({
+        login: true,
+        userName: userName
+      })
     }
   }
 
@@ -23,6 +34,13 @@ class Topbar extends Component {
   }
 
   render () {
+    const {login,userName} = this.state;
+    let dom = null;
+    if(login){
+      dom = <Link to={`/login`}><Icon type="user"/>{userName}</Link>;
+    }else{
+      dom = <Link to={`/login`}><Icon type="user"/>登录/注册</Link>;
+    }
     return (
       <Menu
         onClick={this.handleClick}
@@ -41,7 +59,7 @@ class Topbar extends Component {
             <Link to={`/user/cart`}><Icon type="shopping-cart" />购物车</Link>
           </Menu.Item>
           <Menu.Item key="login">
-            <Link to={`/login`}><Icon type="user"/>登录/注册</Link>
+            {dom}
           </Menu.Item>
         </Menu>
     )

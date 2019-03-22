@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import 'antd/dist/antd.css'
-import { Button, Table, Divider, Tag } from 'antd';
+import { Link } from 'react-router-dom'
+import { Button, Table, Divider } from 'antd';
 import Navbar from '@/coms/navbar'
 
 const { Column } = Table;
@@ -39,7 +40,7 @@ export default class Product extends Component {
         <Navbar defaultSelected={defaultSelected}></Navbar>
         <div className="main">
           <div className="btns">
-            <Button icon="plus" size="large" type="primary">添加产品</Button>           
+            <Link to={`/manager/addorder`}><Button icon="plus" size="large" type="primary">添加产品</Button></Link>
           </div>
           <Table dataSource={data}>
           <Column
