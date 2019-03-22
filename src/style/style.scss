@@ -1,3 +1,35 @@
-// body {
-//   background: #f00;
-// }
+.top-bar{
+  position: fixed;
+  width: 100%;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  z-index: 3;
+}
+.carousel{
+  top: 60px;
+  width: 60%;
+  height: 300px;
+  margin: 0 auto;
+  background: #364D79;
+}
+.product{
+  width: 60%;
+  margin: 80px auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.login-page{
+  display: flex;
+  padding: 50px 50px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  .login-form{
+    border:  1px solid #D9D9D9;
+    padding: 20px 30px; 
+    border-radius: 3px;
+  }
+}
