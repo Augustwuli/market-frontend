@@ -33,3 +33,36 @@
     border-radius: 3px;
   }
 }
+.cart-page{
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 100px;
+  .product-list{
+    width: 100%;
+    .product-detail{
+      display: flex;
+      flex-direction: column;
+      .product-block{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .product-img{
+          width: 100px;
+          height: 100px;
+          background: #364D79;
+        }
+        .product-info{
+          width: calc(100% - 120px);
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          .info-font{
+            white-space: nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+          }
+        }
+      }
+    }
+  }
+}

@@ -35,10 +35,10 @@ export default class Topbar extends Component {
             />
           </Menu.Item>
           <Menu.Item key="app">
-            <Icon type="shopping-cart" />购物车
+            <Link to={`/user/cart`}><Icon type="shopping-cart" />购物车</Link>
           </Menu.Item>
           <Menu.Item key="login">
-           <Link to={`/login`}><Icon type="user"/>登录/注册</Link>
+            <Link to={`/login`}><Icon type="user"/>登录/注册</Link>
           </Menu.Item>
         </Menu>
     )

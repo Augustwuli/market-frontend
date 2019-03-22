@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Form, Icon, Input, Button, Checkbox} from 'antd'
+import {Form, Icon, Input, Button} from 'antd'
 import 'antd/dist/antd.css'
 
 export default class Login extends Component {
@@ -23,7 +23,7 @@ export default class Login extends Component {
     return (
       <div className="login-page">
         <div style={{width: 'calc(100% - 500px)'}}>
-          <img src="../image/login.png" style={{width: '60%'}} ></img>
+          <img alt="轮播图片" src="../image/login.png" style={{width: '60%'}} ></img>
         </div>
         <div>
           <Form onSubmit={this.handleSubmit} className="login-form" style={{width: 300}}>
