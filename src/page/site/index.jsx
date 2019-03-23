@@ -10,57 +10,55 @@ export default class Index extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      list: []
     }
   }
 
   componentDidMount () {
     Api.get('products/list', null, r => {
+      console.log(r.data)
+      this.setState({
+        list: r.data.products
+      })
     })
   }
 
   render () {
+    let { list } = this.state;
+    let dom = null;
+    if(list.length !== 0){
+      let listDom = list.map((i, k) => {
+        return (
+          <Link key={k} to={`/details/${i.id}`} style={{ width: '26%' ,margin: '10px 20px'}}>
+            <Card
+              hoverable
+              cover={<img alt="example" src={`http://localhost:3000/${i.thumb_url}`} style={{ height: 200}}/>}       
+            >
+              <Meta
+                title={i.title}
+                description={`￥${i.price}`}
+              />
+            </Card>
+          </Link>
+        
+          )
+    })
+    dom = (
+      <div className='product'>
+        {listDom}
+      </div>
+    )
+    }
     return (
       <div>
         <Topbar></Topbar>
-        <Carousel autoplay className="carousel">
+        {/* <Carousel autoplay className="carousel">
           <div><h3>1</h3></div>
           <div><h3>2</h3></div>
           <div><h3>3</h3></div>
           <div><h3>4</h3></div>
-        </Carousel>
-        <div className="product">
-          <Link to={`/details/${2}`} style={{ width: '30%'}}>
-            <Card
-              hoverable
-              cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}       
-            >
-              <Meta
-                title="Europe Street beat"
-                description="www.instagram.com"
-              />
-            </Card>
-          </Link>
-          <Card
-            hoverable
-            style={{ width: '30%'}}
-            cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
-          >
-            <Meta
-              title="Europe Street beat"
-              description="www.instagram.com"
-            />
-          </Card>
-          <Card
-            hoverable
-            style={{ width: '30%'}}
-            cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
-          >
-            <Meta
-              title="Europe Street beat"
-              description="www.instagram.com"
-            />
-          </Card>
-        </div>
+        </Carousel> */}
+        {dom}
       </div>
     )
   }

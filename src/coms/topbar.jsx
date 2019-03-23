@@ -55,7 +55,10 @@ class Topbar extends Component {
               style={{ width: 200 }}
             />
           </Menu.Item>
-          <Menu.Item key="app">
+          <Menu.Item key="home">
+            <Link to={`/`}><Icon type="home" />首页</Link>
+          </Menu.Item>
+          <Menu.Item key="cart">
             <Link to={`/user/cart`}><Icon type="shopping-cart" />购物车</Link>
           </Menu.Item>
           <Menu.Item key="login">

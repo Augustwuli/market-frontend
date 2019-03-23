@@ -22,7 +22,8 @@
   margin: 80px auto;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 }
 .login-page{
   display: flex;
@@ -45,6 +46,9 @@
     .product-detail{
       display: flex;
       flex-direction: column;
+      border-bottom: 1px solid #e2e2e2;
+      margin: 10px auto;
+      padding-bottom: 10px;
       .product-block{
         display: flex;
         flex-direction: row;
@@ -89,7 +93,9 @@
   margin: 0 auto;
   margin-top: 100px;
   .detail-param{
-    margin-top: 50px; 
+    width: 50%;
+    margin-top: 50px;
+    margin-bottom: 60px;
   }
   .detail-block{
     display: flex;
@@ -108,6 +114,23 @@
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
+      .detail-title{
+        font-size: 24px;
+        font-weight: bold;
+      }
+      .detail-content{
+        margin-top: 20px; 
+        font-size: 16px;
+      }
+      .detail-price{
+        margin-top: 10px;
+        color: #DD5044;
+        font-size: 20px;
+      }
+      .detail-num{
+        margin-top: 10px; 
+        font-size: 18px;        
+      }
       .btns{
         position: absolute;
         bottom: 0;

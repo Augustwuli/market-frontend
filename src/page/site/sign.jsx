@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import {
-  Alert, Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete,
+  Alert, Form, Input, Tooltip, Icon, Select, Checkbox, Button
 } from 'antd';
-import { Link } from 'react-router-dom'
 import Api from '@/tool/api.js'
 import 'antd/dist/antd.css'
 
@@ -17,7 +16,6 @@ export default class Sign extends Component {
       toast: false,
       statu: 0,
       messgae: '',
-      autoCompleteResult: [],
     }
   }
   
@@ -81,7 +79,6 @@ export default class Sign extends Component {
 
   render () {
     const { getFieldDecorator } = this.props.form;
-    const { autoCompleteResult } = this.state;
     const { toast ,message,statu } = this.state;
     let dom = null;
     if (toast) {

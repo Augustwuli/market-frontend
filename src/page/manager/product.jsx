@@ -3,38 +3,46 @@ import 'antd/dist/antd.css'
 import { Link } from 'react-router-dom'
 import { Button, Table, Divider } from 'antd';
 import Navbar from '@/coms/navbar'
+import Api from '@/tool/api.js'
 
 const { Column } = Table;
-const data = [{
-  key: '1',
-  id:'1',
-  title: '测试',
-  sale: 23,
-  num: 68
-}, {
-  key: '2',
-  id:'2',
-  title: '测试',
-  sale: 34,
-  num: 68
-}, {
-  key: '3',
-  id:'3',
-  title: '测试',
-  sale: 46,
-  num: 68
-}];
 
 export default class Product extends Component {
   constructor (props) {
     super(props)
     this.state = {
       defaultSelected: '2',
+      data: []
     }
   }
 
+  componentDidMount () {
+    this.getData()
+  }
+
+  getData () {
+    Api.get('products/manager', null, r => {
+      console.log(r.data)
+      this.setState({
+        data: r.data.products
+      })
+    })
+  }
+
+  delete = (e) => {
+    let param = {
+      id: e
+    }
+    Api.post(`products/delete`, param, r => {
+      console.log(r)
+      if(r.success === true){
+        this.getData()
+      }
+    })
+  }
+
   render () {
-    const {defaultSelected} = this.state;
+    const {defaultSelected,data} = this.state;
     return (
       <div className="manager-page">
         <Navbar defaultSelected={defaultSelected}></Navbar>
@@ -42,7 +50,7 @@ export default class Product extends Component {
           <div className="btns">
             <Link to={`/manager/addorder`}><Button icon="plus" size="large" type="primary">添加产品</Button></Link>
           </div>
-          <Table dataSource={data}>
+          <Table dataSource={data} rowKey="id">
           <Column
             title="编号"
             dataIndex="id"
@@ -54,23 +62,18 @@ export default class Product extends Component {
             key="title"
           />
           <Column
-            title="销量"
-            dataIndex="sale"
-            key="sale"
-          />
-          <Column
             title="库存"
             dataIndex="num"
             key="num"
           />
           <Column
-            title="Action"
+            title="操作"
             key="action"
             render={(text, record) => (
               <span>
-                <a href="javascript:;">编辑</a>
+                <Link to={`/manager/editorder/${record.id}`}>编辑</Link>
                 <Divider type="vertical" />
-                <a href="javascript:;">删除</a>
+                <a href="javascript:;" onClick={() =>this.delete(record.id)}>删除</a>
               </span>
             )}
           />

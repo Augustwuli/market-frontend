@@ -10,6 +10,7 @@ import Product from '@/page/manager/product'
 import Order from '@/page/manager/order'
 import Detail from '@/page/site/detail'
 import AddOrder from '@/page/manager/addOrder'
+import EditOrder from '@/page/manager/editOrder'
 
 export default class App extends Component {
   render () {
@@ -26,6 +27,7 @@ export default class App extends Component {
           <Route exact path='/manager/order' component={Order}/>
           <Route exact path='/details/:id' component={Detail}/>
           <Route exact path='/manager/addorder' component={AddOrder}/>
+          <Route exact path='/manager/editorder/:id' component={EditOrder}/>
         </Switch>
       </Router>
     )
